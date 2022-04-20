@@ -22,9 +22,48 @@ function App() {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
+
+  const handleAddUser = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const user = { name, email };
+
+    //post data to server
+
+    //here use use fetch to post the new data, - by default fetch's method get - so we mention the method to POST in case where we are posting - and also we write some more staff with that
+    fetch('http://localhost:5000/user', {
+      method: "POST",
+      headers: {
+        'constent-type':'application/json'
+      },
+      body:JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => {
+        const newUsers = [...users, data];
+        setUsers(newUsers);
+        console.log(data);
+    })
+
+
+  }
   return (
     <div className="App">
       <h1>Our users length {users.length}</h1>
+
+      {/* This form will take the input data and send or post to the server side database */}
+      <form onSubmit={handleAddUser} action="">
+        <input type="text" name="name" id="" placeholder="Name" />
+        <input type="text" name="email" id="" placeholder="Email" />
+        <input type="submit" name="name" id="" value='Add User'/>
+      </form>
+
+      <ul>
+        {
+          users.map(user => <li>{user.name} id:{user.id} email:{user.email} </li>)
+        }
+      </ul>
     </div>
   );
 }
