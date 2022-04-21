@@ -35,7 +35,7 @@ function App() {
     fetch('http://localhost:5000/user', {
       method: "POST",
       headers: {
-        'constent-type':'application/json'
+        'content-type':'application/json'
       },
       body:JSON.stringify(user)
     })
@@ -56,7 +56,7 @@ function App() {
       <form onSubmit={handleAddUser} action="">
         <input type="text" name="name" id="" placeholder="Name" />
         <input type="text" name="email" id="" placeholder="Email" />
-        <input type="submit" name="name" id="" value='Add User'/>
+        <input type="submit"  id="" value='Add User'/>
       </form>
 
       <ul>
